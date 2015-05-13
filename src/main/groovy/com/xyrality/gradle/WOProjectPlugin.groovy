@@ -270,9 +270,6 @@ class WOProject implements Plugin<Project> {
 			compile group: 'com.webobjects', name: 'JavaFoundation', version: webobjectsVersion
 			compile group: 'com.webobjects', name: 'JavaWebObjects', version: webobjectsVersion
 			compile group: 'com.webobjects', name: 'JavaJDBCAdaptor', version: webobjectsVersion
-			compile group: 'wonder.plugins', name: 'PostgresqlPlugIn', version: wonderVersion
-			compile group: 'postgresql', name: 'postgresql', version: '9.0-801.jdbc4'
-			compile group: 'org.eclipse.jdt', name:'org.eclipse.jdt.annotation', version:'2.0.0.v20140415-1436'
 		}
 	}
 
@@ -292,7 +289,6 @@ class WOProject implements Plugin<Project> {
 		project.repositories {
 			mavenCentral()
 
-			maven { url 'http://nexus.xyrality.net/content/repositories/thirdparty/' }
 			maven { url 'http://maven.wocommunity.org/content/groups/public' }
 			maven { url 'http://maven.wocommunity.org/content/groups/public-snapshots' }
 			maven { url 'https://repo.eclipse.org/content/repositories/releases/' }
