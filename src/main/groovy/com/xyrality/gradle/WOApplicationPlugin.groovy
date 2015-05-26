@@ -90,7 +90,7 @@ class WOApplication extends WOProject {
 					task(copyTaskName, type: Exec, dependsOn: woapplication) {
 						description = taskDescription
 						workingDir buildDir
-						def sshCommand = String.format('tar -C "%s" -zcf - ./ | ssh %s -p %d %s@%s "mkdir -p %s && tar -C %s -zxf -"', woaName, additionalSSHParameters, deploymentSSHPort, deploymentSSHUser, deploymentServer, destinationPath, destinationPath)
+						def sshCommand = String.format('tar -C "%s" -zcf - ./ | ssh %s -p %d %s@%s "mkdir -p %s && ln -sfn %s %s%s && tar -C %s -zxf -"', woaName, additionalSSHParameters, deploymentSSHPort, deploymentSSHUser, deploymentServer, destinationPath, destinationPath, deploymentPath, woaName, destinationPath)
 						commandLine 'bash', '-c', sshCommand
 					}
 					project.copyToServers.dependsOn(copyTaskName)
