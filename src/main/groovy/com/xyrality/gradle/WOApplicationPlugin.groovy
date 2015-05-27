@@ -28,7 +28,7 @@ class WOApplication extends WOProject {
 
 	void apply(Project project) {
 		super.apply(project)
-		
+
 		def extraVersion = System.getProperty('extraVersion')
 		if (extraVersion != null) {
 			if (extraVersion != "") {
@@ -44,7 +44,7 @@ class WOApplication extends WOProject {
 
 		configureEclipseProject(project)
 		configureWOApplicationTasks(project)
-		
+
 		project.afterEvaluate {
 			configureDeployTasks(project)
 		}
@@ -60,16 +60,16 @@ class WOApplication extends WOProject {
 		def deploymentMonitorBounceTasks = project.wonder.deploymentMonitorBounceTasks
 		def deploymentSSHPort = project.wonder.deploymentSSHPort
 		def deploymentSSHIgnoreHostKey = project.wonder.deploymentSSHIgnoreHostKey 
-		
+
 		if (!deploymentPath.endsWith('/')) {
 			deploymentPath += '/'
 		}
-		
+
 		if (deploymentServers.size() != 0) {
 			if (deploymentPath.length() == 0 || deploymentSSHUser.length() == 0) {
 				throw new InvalidUserDataException('Need to specify deploymentPath and deploymentSSHUser when specifying deploymentServers')
 			}
-			
+
 			project.with {
 				task('copyToServers') {
 					// empty task, only to be used for dependencies
@@ -82,11 +82,11 @@ class WOApplication extends WOProject {
 					def destinationPath = deploymentPath + woaVersionedName
 					def taskDescription = 'copies the WOA binary to ' + deploymentServer
 					def additionalSSHParameters = ''
-					
+
 					if (deploymentSSHIgnoreHostKey) {
 						additionalSSHParameters = '-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
-					} 
-					
+					}
+
 					task(copyTaskName, type: Exec, dependsOn: woapplication) {
 						description = taskDescription
 						workingDir buildDir
@@ -96,7 +96,7 @@ class WOApplication extends WOProject {
 					project.copyToServers.dependsOn(copyTaskName)
 				}
 			}
-	
+
 			if (deploymentMonitorBounceTasks.size() > 0) {
 				project.with {
 					task('deployToServers', dependsOn: 'copyToServers') {

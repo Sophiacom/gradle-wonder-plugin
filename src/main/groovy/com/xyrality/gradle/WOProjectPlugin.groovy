@@ -16,20 +16,13 @@ import groovy.util.Node
 
 import org.gradle.api.specs.Specs
 import org.gradle.api.tasks.*
-import org.gradle.api.plugins.BasePlugin
-import org.gradle.api.plugins.JavaPlugin
-import org.gradle.api.plugins.MavenPlugin
 import org.gradle.api.tasks.bundling.*
-import org.gradle.plugins.ide.eclipse.EclipsePlugin
-import org.gradle.testing.jacoco.plugins.JacocoPlugin
-
 
 class WOProject implements Plugin<Project> {
 	void apply(Project project) {
-		project.getPlugins().apply(BasePlugin.class)
-		project.getPlugins().apply(JavaPlugin.class)
-		project.getPlugins().apply(MavenPlugin.class)
-		project.getPlugins().apply(EclipsePlugin.class)
+		project.apply(plugin: 'java')
+		project.apply(plugin: 'maven')
+		project.apply(plugin: 'eclipse')
 
 		project.extensions.create('wonder', WOProjectPluginExtension)
 
