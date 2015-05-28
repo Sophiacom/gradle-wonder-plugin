@@ -280,7 +280,9 @@ class WOProject implements Plugin<Project> {
 
 		project.dependencies {
 			testCompile 'org.mockito:mockito-all:1.10.19'
-			testCompile group: 'com.wounit', name: 'wounit', version: '1.2.1'
+			testCompile(group: 'com.wounit', name: 'wounit', version: '1.2.1') {
+				transitive = false
+			}
 			testCompile group: 'junit', name: 'junit', version: '4.11'
 			testCompile group: 'wonder.eoadaptors', name: 'JavaMemoryAdaptor', version: wonderVersion
 		}
