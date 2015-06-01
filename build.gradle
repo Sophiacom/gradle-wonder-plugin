@@ -18,6 +18,7 @@ dependencies {
 publishing {
 	publications {
 		mavenJava(MavenPublication) {
+			artifactId 'gradle-wonder-plugin'
 			from components.java
 		}
 	}
